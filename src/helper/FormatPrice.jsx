@@ -7,4 +7,6 @@ const FormatPrice = ({price}) => {
     }).format(price / 100)
 )};
 
+// For pakistan (“en-PK”, currency:” PAK”)
+
 export default FormatPrice;

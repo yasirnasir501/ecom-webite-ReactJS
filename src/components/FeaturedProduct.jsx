@@ -8,7 +8,7 @@ const FeaturedProduct = () => {
     const {isLoading, featureProducts} = useProductContext();
 
     if (isLoading) {
-        return <div> .....Loading </div>
+        return <div className='page_loading'> .....Loading </div>
     }
 
   return (
