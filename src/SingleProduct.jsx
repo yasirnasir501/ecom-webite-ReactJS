@@ -12,13 +12,12 @@ import { MdOutlineSecurity } from "react-icons/md";
 const SingleProduct = () => {
   const API = "https://api.pujakaitem.com/api/products";
 
-  const { getSingleProduct, isSingleLoading, singleProduct } =
-    useProductContext();
+  const { getSingleProduct, isSingleLoading, singleProduct } = useProductContext();
 
   const { id } = useParams();
 
   const {
-    id: kingg,
+    id: kinggg,
     name,
     company,
     price,
@@ -42,7 +41,7 @@ const SingleProduct = () => {
     <Wrapper>
       <PageNavigation title={name} />
       <Container className="container">
-        <div className="grid grid-two-columns">
+        <div className="grid grid-two-column">
           {/* product image */}
           <div className="product_images">
             <MyImage imgs={image} />
@@ -91,7 +90,7 @@ const SingleProduct = () => {
               <p>
                 Brand: <span>{company}</span>
               </p>
-
+              
             </div>
 
           </div>
