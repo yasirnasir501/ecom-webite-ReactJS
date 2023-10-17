@@ -5,10 +5,17 @@ const FilterReducer = (state, action) => {
             ...state,
             filter_products:[...action.payload],
             all_products: [...action.payload]
-        }
+        };
+
+        case 'SET_GRIDVIEW':
+          return{
+            ...state,
+            grid_view: true,
+          };
+
         default:
             return state;
   }
 }
 
-export default FilterReducer
+export default FilterReducer;

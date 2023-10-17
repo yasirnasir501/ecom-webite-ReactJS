@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import FilterSection from './components/FilterSection';
 import Sort from './components/Sort';
 import ProductList from './components/ProductList';
-import { useFilterContext } from './context/filter_Context';
 
 const Products = () => {
-  const {filter_products} = useFilterContext();
-  console.log(filter_products)
 
   return (
     <Wrapper>
