@@ -4,7 +4,7 @@ import {BsFillGridFill, BsList} from 'react-icons/bs'
 import {useFilterContext} from '../context/filter_Context'
 
 const Sort = () => {
-  const {grid_view, setGridView, setListView, filter_products} = useFilterContext();
+  const {grid_view, setGridView, setListView, filter_products, sorting} = useFilterContext();
   return (
     <Wrapper className='sort-section'>
       {/* 1 column  */}
@@ -15,7 +15,20 @@ const Sort = () => {
       {/* 2 column  */}
       <div className='product-data'>{`${filter_products.length} Product Available`}</div>
       {/* 3 column  */}
-      <div className='sort-section'>Drop Down</div>
+      <div className='sort-section'>
+        <form action="#">
+          <label htmlFor="sort"></label>
+          <select name="sort" id="sort" className='sort-selection--style' onClick={sorting}>
+            <option value="lowest">Price(lowest)</option>
+            <option value="#" disabled></option>
+            <option value="highest">Price(highest)</option>
+            <option value="#" disabled></option>
+            <option value="a-z">Price(a-z)</option>
+            <option value="#" disabled></option>
+            <option value="z-a">Price(z-a)</option>
+          </select>
+        </form>
+      </div>
     </Wrapper>
   )
 }
