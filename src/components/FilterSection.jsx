@@ -3,7 +3,21 @@ import styled from 'styled-components';
 import { useFilterContext } from '../context/filter_Context';
 
 const FilterSection = () => {
-  const {filters: {text}, updateFilterValue} = useFilterContext();
+  const {filters: {text, category}, updateFilterValue, all_products} = useFilterContext();
+
+  // unique data each fileds 
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((curElem) => {
+      return curElem[property]
+    });
+
+    return (newVal = ['All', ...new Set(newVal)])
+  }
+
+  // Unique Data 
+  const categoryData = getUniqueData(all_products, 'category');
+  const companyData = getUniqueData(all_products, 'company');
+
   return (
     <Wrapper>
         <div className='filter_search'>
@@ -11,6 +25,30 @@ const FilterSection = () => {
             <input type="text" name='text' value={text} onChange={updateFilterValue}/>
           </form>
         </div>
+
+        {/* Category  */}
+        <div className='filter-category'>
+          <h3>Category</h3>
+          <div>{categoryData.map((curElem, index) => {
+            return <button key={index} type='button' name='category' className={curElem === category ? 'active' : ''} value={curElem} onClick={updateFilterValue}>{curElem}</button>
+          })}</div>
+        </div>
+
+        {/* company  */}
+        <div className='filter-company'>
+          <h3>Company</h3>
+
+          <form action="#">
+            <select name="company" id="company" className='filter-company--select' onClick={updateFilterValue}>
+              {companyData.map((curElem, index) => {
+                return (
+                  <option key={index} value={curElem} name="company">{curElem}</option>
+                )
+              })}
+            </select>
+          </form>
+        </div>
+
     </Wrapper>
   )
 }
