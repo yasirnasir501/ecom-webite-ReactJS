@@ -1,23 +1,36 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import { useFilterContext } from '../context/filter_Context';
+import { FaCheck } from 'react-icons/fa';
+import FormatPrice  from '../helper/FormatPrice';
 
 const FilterSection = () => {
-  const {filters: {text, category}, updateFilterValue, all_products} = useFilterContext();
+  const {filters: {text, category, color, price, maxPrice, minPrice}, 
+  updateFilterValue, all_products
+} = useFilterContext();
 
   // unique data each fileds 
-  const getUniqueData = (data, property) => {
+  const getUniqueData = (data, attr) => {
     let newVal = data.map((curElem) => {
-      return curElem[property]
+      return curElem[attr]
     });
 
-    return (newVal = ['All', ...new Set(newVal)])
+    if (attr === 'colors') {
+      
+      newVal = newVal.flat();
+    } 
+    
+    return (newVal = ['all', ...new Set(newVal)]);
+    
+
+    
   }
 
   // Unique Data 
   const categoryData = getUniqueData(all_products, 'category');
   const companyData = getUniqueData(all_products, 'company');
-
+  const colorsData = getUniqueData(all_products, 'color');
+console.log(colorsData)
   return (
     <Wrapper>
         <div className='filter_search'>
@@ -48,6 +61,50 @@ const FilterSection = () => {
             </select>
           </form>
         </div>
+
+        {/* Colors Section  */}
+        <div className="filter-colors colors">
+        <h3>Colors</h3>
+
+        <div className="filter-color-style">
+          {colorsData.map((curColor, index) => {
+            if (curColor === "all") {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  value={curColor}
+                  name="color"
+                  className="color-all--style"
+                  onClick={updateFilterValue}>
+                  all
+                </button>
+              );
+            }
+            return (
+              <button
+                key={index}
+                type="button"
+                value={curColor}
+                name="color"
+                style={{ backgroundColor: curColor }}
+                className={color === curColor ? "btnStyle active" : "btnStyle"}
+                onClick={updateFilterValue}>
+                {color === curColor ? <FaCheck className="checkStyle" /> : null}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* price filter section  */}
+      <div className='filter_price'>
+          <h3>Price</h3>
+          <p>
+            <FormatPrice price={price}/>
+          </p>
+          <input type="range" name='price'  min={minPrice} max={maxPrice} value={price} onChange={updateFilterValue}/>
+      </div>
 
     </Wrapper>
   )
