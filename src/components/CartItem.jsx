@@ -2,8 +2,10 @@ import React from 'react'
 import FormatPrice from '../helper/FormatPrice'
 import CartAmountToggle from './CartAmountToggle'
 import {BsFillTrash3Fill} from 'react-icons/bs'
+import { useCartContext } from '../context/cart_context'
 
 const CartItem = ({id, name, image, color, price, amount}) => {
+    const {removeItem} = useCartContext();
 
     const setDecrease = () => {
         // amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -42,7 +44,9 @@ const CartItem = ({id, name, image, color, price, amount}) => {
         </div>
 
         {/* remove  */}
-        <BsFillTrash3Fill className='remove_icon'/>
+        <div>
+        <BsFillTrash3Fill className='remove_icon' onClick={() => removeItem(id)}/>
+        </div>
 
     </div>
   )
