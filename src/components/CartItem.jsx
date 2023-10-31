@@ -5,15 +5,15 @@ import {BsFillTrash3Fill} from 'react-icons/bs'
 import { useCartContext } from '../context/cart_context'
 
 const CartItem = ({id, name, image, color, price, amount}) => {
-    const {removeItem} = useCartContext();
+    const {removeItem, setDecrease, setIncrease} = useCartContext();
 
-    const setDecrease = () => {
-        // amount > 1 ? setAmount(amount - 1) : setAmount(1);
-    }
+    // const setDecrease = () => {
+    //     // amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    // }
 
-    const setIncrease = () => {
-        // amount < stock ? setAmount(amount + 1) : setAmount(stock);
-    }
+    // const setIncrease = () => {
+    //     // amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    // }
   return (
     <div className='cart_heading grid grid-five-column'>
         <div className='cart-image--name'>
@@ -36,7 +36,10 @@ const CartItem = ({id, name, image, color, price, amount}) => {
         </div>
 
         {/* Qunatity  */}
-        <CartAmountToggle amount={amount} setDecrease={setDecrease} setIncrease={setIncrease} />
+        <CartAmountToggle
+         amount={amount} 
+         setDecrease={() => setDecrease(id)} 
+         setIncrease={() => setIncrease(id)} />
 
         {/* subtotal  */}
         <div className='cart-hide'>
@@ -52,4 +55,4 @@ const CartItem = ({id, name, image, color, price, amount}) => {
   )
 }
 
-export default CartItem
+export default CartItem;
